@@ -1,14 +1,14 @@
 #include <iostream>
 using namespace std;
 
-// Студент
+// РЎС‚СѓРґРµРЅС‚
 struct stud {
 	int npp;
 	char grupa[10];
 	float reiting;
 };
 
-// Группа
+// Р“СЂСѓРїРїР°
 struct grupa {
 	char name[10];
 	int count;
@@ -16,7 +16,7 @@ struct grupa {
 	grupa* nextGrupa;
 };
 
-// Ф-я для створення структури група. 
+// Р¤-СЏ РґР»СЏ СЃС‚РІРѕСЂРµРЅРЅСЏ СЃС‚СЂСѓРєС‚СѓСЂРё РіСЂСѓРїР°. 
 grupa* createGrupa() {
 	grupa * gr = new grupa;
 	grupa* gr2;
@@ -30,7 +30,7 @@ grupa* createGrupa() {
 	return gr2;
 }
 
-// Створює массив вказівників на тип stud і дає його значенням NULL
+// РЎС‚РІРѕСЂСЋС” РјР°СЃСЃРёРІ РІРєР°Р·С–РІРЅРёРєС–РІ РЅР° С‚РёРї stud С– РґР°С” Р№РѕРіРѕ Р·РЅР°С‡РµРЅРЅСЏРј NULL
 stud** createArrey(int size) {
 	stud** in=NULL, **in2=NULL;
 
@@ -45,7 +45,7 @@ stud** createArrey(int size) {
 	return in2;
 }
 
-// Ф-я сортування списку студентів
+// Р¤-СЏ СЃРѕСЂС‚СѓРІР°РЅРЅСЏ СЃРїРёСЃРєСѓ СЃС‚СѓРґРµРЅС‚С–РІ
 void sort(stud** in, int size) {
 	stud* temp;
 	bool t = true;
@@ -84,7 +84,7 @@ void sortGrups(grupa** in, int size) {
 	}
 }
 
-// Створює із однозвязного списку масив.
+// РЎС‚РІРѕСЂСЋС” С–Р· РѕРґРЅРѕР·РІСЏР·РЅРѕРіРѕ СЃРїРёСЃРєСѓ РјР°СЃРёРІ.
 grupa** createArrayFromList(grupa* head, int& count, char* str) {
 	
 	grupa** out = NULL;
@@ -94,7 +94,7 @@ grupa** createArrayFromList(grupa* head, int& count, char* str) {
 
 	count=0;
 
-	// Підрахунок елементів списку
+	// РџС–РґСЂР°С…СѓРЅРѕРє РµР»РµРјРµРЅС‚С–РІ СЃРїРёСЃРєСѓ
 	while(gptr!= NULL) 
 	{
 		if(gptr!=NULL) 
@@ -129,43 +129,43 @@ grupa** createArrayFromList(grupa* head, int& count, char* str) {
 }
 
 
-// Формує список груп з введених студентів, вираховує середній бал для кожної групи
+// Р¤РѕСЂРјСѓС” СЃРїРёСЃРѕРє РіСЂСѓРї Р· РІРІРµРґРµРЅРёС… СЃС‚СѓРґРµРЅС‚С–РІ, РІРёСЂР°С…РѕРІСѓС” СЃРµСЂРµРґРЅС–Р№ Р±Р°Р» РґР»СЏ РєРѕР¶РЅРѕС— РіСЂСѓРїРё
 grupa* countGroupAverage(stud** in, int size) {
 
-	grupa* head;			// Вказівник на початок списку
+	grupa* head;			// Р’РєР°Р·С–РІРЅРёРє РЅР° РїРѕС‡Р°С‚РѕРє СЃРїРёСЃРєСѓ
 	grupa* gptr;			
-	grupa* prev_gptr;		// Вказівник на попередній елемент
+	grupa* prev_gptr;		// Р’РєР°Р·С–РІРЅРёРє РЅР° РїРѕРїРµСЂРµРґРЅС–Р№ РµР»РµРјРµРЅС‚
 
 	head = createGrupa();
 	gptr = head;
 	strcpy(head->name, in[0]->grupa);
 
 	for(int i=0; i<size; i++) {
-		gptr = head;				// Вказівник на першу групу
+		gptr = head;				// Р’РєР°Р·С–РІРЅРёРє РЅР° РїРµСЂС€Сѓ РіСЂСѓРїСѓ
 		prev_gptr  = head;			
 		
 		while (true) {
 
 			if( strstr(in[i]->grupa, gptr->name)!=NULL) {
-				// Якщо група існує, прорахувати середній бал				
+				// РЇРєС‰Рѕ РіСЂСѓРїР° С–СЃРЅСѓС”, РїСЂРѕСЂР°С…СѓРІР°С‚Рё СЃРµСЂРµРґРЅС–Р№ Р±Р°Р»				
 					gptr->average = (gptr->average*(float)gptr->count + in[i]->reiting) / (float)(gptr->count+1);
 					gptr->count++;
 			} else {
 				prev_gptr = gptr;
 				gptr = gptr->nextGrupa;
 				
-				// Якщо група не існує, створити нову групу 
+				// РЇРєС‰Рѕ РіСЂСѓРїР° РЅРµ С–СЃРЅСѓС”, СЃС‚РІРѕСЂРёС‚Рё РЅРѕРІСѓ РіСЂСѓРїСѓ 
 				if(gptr==NULL) {					
 					gptr = createGrupa();
-					strcpy(gptr->name, in[i]->grupa); // Створення міні групи Прорахунок середнього балу
+					strcpy(gptr->name, in[i]->grupa); // РЎС‚РІРѕСЂРµРЅРЅСЏ РјС–РЅС– РіСЂСѓРїРё РџСЂРѕСЂР°С…СѓРЅРѕРє СЃРµСЂРµРґРЅСЊРѕРіРѕ Р±Р°Р»Сѓ
 					gptr->average = (gptr->average*(float)gptr->count + in[i]->reiting) / (float)(gptr->count+1);
 					gptr->count++;
 
-					//і добавити в список
+					//С– РґРѕР±Р°РІРёС‚Рё РІ СЃРїРёСЃРѕРє
 					prev_gptr->nextGrupa = gptr;
 				} else continue;
 			}
-			break; // Вийти із циклу while
+			break; // Р’РёР№С‚Рё С–Р· С†РёРєР»Сѓ while
 		}		
 	}
 
@@ -177,15 +177,15 @@ void find(stud** in, int size, char* str) {
 
 	grupa* grupList = NULL, *gptr = NULL;
 
-	// Формування списку груп
+	// Р¤РѕСЂРјСѓРІР°РЅРЅСЏ СЃРїРёСЃРєСѓ РіСЂСѓРї
 	grupList = countGroupAverage(in, size);
 	
-	// Вивід всіх груп
-	cout << "\nВсі Групи:" << endl;
+	// Р’РёРІС–Рґ РІСЃС–С… РіСЂСѓРї
+	cout << "\nР’СЃС– Р“СЂСѓРїРё:" << endl;
 
 	gptr = grupList;
 	while (gptr != NULL) {
-		cout << "Група: \t" << gptr->name << "\tсередній бал :" << gptr->average << endl;
+		cout << "Р“СЂСѓРїР°: \t" << gptr->name << "\tСЃРµСЂРµРґРЅС–Р№ Р±Р°Р» :" << gptr->average << endl;
 		gptr = gptr->nextGrupa;
 	}
 
@@ -194,20 +194,20 @@ void find(stud** in, int size, char* str) {
 	gr_arr = createArrayFromList(grupList, gr_arr_size, str);
 
 	if(gr_arr_size == 0) {
-		cout << "\nГрупа " << str << " не знайдено" << endl;
+		cout << "\nР“СЂСѓРїР° " << str << " РЅРµ Р·РЅР°Р№РґРµРЅРѕ" << endl;
 		return;
 	} else {
 		
-		// Сортування масиву груп
+		// РЎРѕСЂС‚СѓРІР°РЅРЅСЏ РјР°СЃРёРІСѓ РіСЂСѓРї
 		sortGrups(gr_arr, gr_arr_size);
 		
-		// Вивід відсортованих груп
-		cout << "\nЗнайдені групи :" << endl;
+		// Р’РёРІС–Рґ РІС–РґСЃРѕСЂС‚РѕРІР°РЅРёС… РіСЂСѓРї
+		cout << "\nР—РЅР°Р№РґРµРЅС– РіСЂСѓРїРё :" << endl;
 		for (int i=0; i<gr_arr_size; i++) { 
 			if(i>2) {
 				break;
 			}
-			cout << "Група: " << gr_arr[i]->name << "\t" << "середній бал : " << gr_arr[i]->average << endl;
+			cout << "Р“СЂСѓРїР°: " << gr_arr[i]->name << "\t" << "СЃРµСЂРµРґРЅС–Р№ Р±Р°Р» : " << gr_arr[i]->average << endl;
 		}
 	}
 }
@@ -217,22 +217,22 @@ void enter() {
 	stud** students;
 	stud* p;
 
-	cout << "Введіть кількість студентів: ";
+	cout << "Р’РІРµРґС–С‚СЊ РєС–Р»СЊРєС–СЃС‚СЊ СЃС‚СѓРґРµРЅС‚С–РІ: ";
 	cin >> size;
 	
 	if (size<2) {
-		cout << "Значення має бути 2 і вище";
+		cout << "Р—РЅР°С‡РµРЅРЅСЏ РјР°С” Р±СѓС‚Рё 2 С– РІРёС‰Рµ";
 		return;
 	}	
-	// Створює масив для студентів
+	// РЎС‚РІРѕСЂСЋС” РјР°СЃРёРІ РґР»СЏ СЃС‚СѓРґРµРЅС‚С–РІ
 	students = createArrey(size);
 
 	for (int i=0; i<size; i++) {
 		p = new stud;
-		cout << "Студент #" << i+1 << " (Середній бал Групи): "<<endl;
-		cout << "Введіть назву групи : ";
+		cout << "РЎС‚СѓРґРµРЅС‚ #" << i+1 << " (РЎРµСЂРµРґРЅС–Р№ Р±Р°Р» Р“СЂСѓРїРё): "<<endl;
+		cout << "Р’РІРµРґС–С‚СЊ РЅР°Р·РІСѓ РіСЂСѓРїРё : ";
 		cin >> p->grupa; 
-		cout << "Введіть Середній бал Групи : ";
+		cout << "Р’РІРµРґС–С‚СЊ РЎРµСЂРµРґРЅС–Р№ Р±Р°Р» Р“СЂСѓРїРё : ";
 		cin	>> p->reiting;
 		p->npp = i+1;
 		students[i] = p;
@@ -240,13 +240,13 @@ void enter() {
 	
 
 	sort(students, size);
-	cout << endl << "\nВідсортований список студентів : " << endl;
+	cout << endl << "\nР’С–РґСЃРѕСЂС‚РѕРІР°РЅРёР№ СЃРїРёСЃРѕРє СЃС‚СѓРґРµРЅС‚С–РІ : " << endl;
 
 	for (int i=0; i<size; i++) {
-		cout << "Студент " << students[i]->npp << "\t" << students[i]->grupa << "\t" << students[i]->reiting << endl;
+		cout << "РЎС‚СѓРґРµРЅС‚ " << students[i]->npp << "\t" << students[i]->grupa << "\t" << students[i]->reiting << endl;
 	}
 
-	find(students, size, "КН-");
+	find(students, size, "РљРќ-");
 
 }
 
